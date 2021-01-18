@@ -30,6 +30,15 @@ void Exec_MSG_Motion(int conn, char *pMsg)
 		return;
 	}
 
+	if (m->ID != conn)
+		return;
+
+	if (m->Motion < 0 || m->Motion > 27)
+		return;
+
+	if (m->Parm < 0 || m->Parm > 27)
+		return;
+
 	sprintf(temp, "etc,motion motion:%d parm:%d notused:%d", m->Motion, m->Parm, m->NotUsed);
 	Log(temp, pUser[conn].AccountName, pUser[conn].IP);
 
